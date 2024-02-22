@@ -78,6 +78,8 @@ media:
   id: ${DEFAULT_ZLM_ID:self}
   # [必须修改] zlm服务器的内网IP
   ip: ${DEFAULT_ZLM_HOST:172.16.51.151}
+  hook-ip: ${DEFAULT_ZLM_HOOK_IP:172.16.51.151}
+  hook-port: ${DEFAULT_ZLM_HOOK_PORT:8080}
   # [必须修改] zlm服务器的http.port
   http-port: ${DEFAULT_ZLM_PORT:1080}
   # [可选] zlm服务器的hook.admin_params=secret
