@@ -78,6 +78,17 @@ public class DateUtil {
 	}
 
     /**
+     * yyyy_MM_dd_HH_mm_ss 转时间戳
+     * @param formatTime
+     * @return
+     */
+    public static long yyyy_MM_dd_HH_mm_ssToTimestampInMs(String formatTime) {
+        TemporalAccessor temporalAccessor = formatter.parse(formatTime);
+        Instant instant = Instant.from(temporalAccessor);
+        return instant.toEpochMilli();
+    }
+
+    /**
      * 时间戳 转 yyyy_MM_dd_HH_mm_ss
      */
 	public static String timestampTo_yyyy_MM_dd_HH_mm_ss(long timestamp) {
