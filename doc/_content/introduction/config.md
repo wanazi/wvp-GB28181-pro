@@ -24,7 +24,7 @@ java -jar wvp-pro-*.jar --spring.config.location=../src/main/resources/applicati
 移除jar包内/BOOT-INF/classes/下所有以application开头的文件，使用解压缩工具打开jar即可，不需要解压出来。
 ```shell
 cd wvp-GB28181-pro/target
-mv ../src/main/resources/application-dev.yml application.yml 
+mv ../src/main/resources/application.yml application.yml 
 java -jar wvp-pro-*.jar 
 ```
 这也是我自己最常用的方式。
