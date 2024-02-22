@@ -70,7 +70,7 @@ public class MediaServerServiceImpl implements IMediaServerService {
     @Value("${server.ssl.enabled:false}")
     private boolean sslEnabled;
 
-    @Value("${server.port}")
+    @Value("${media.hook-port}")
     private Integer serverPort;
 
     @Autowired
