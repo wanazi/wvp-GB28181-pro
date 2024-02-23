@@ -262,9 +262,10 @@
             console.log(this.detailFiles)
             let timeForFile = this.getTimeForFile(this.detailFiles[0]);
             let lastTimeForFile = this.getTimeForFile(this.detailFiles[this.detailFiles.length - 1]);
-            let timeNum = timeForFile[0].getTime() - new Date(this.chooseDate + " " + this.timeFormat).getTime()
+            var startTimeOfDay=new Date(this.chooseDate + " " + this.timeFormat);
+            let timeNum = timeForFile[0].getTime() - startTimeOfDay.getTime()
             console.log(timeNum)
-            let lastTimeNum = lastTimeForFile[1].getTime() - new Date(this.chooseDate + " " + this.timeFormat).getTime()
+            let lastTimeNum = lastTimeForFile[1].getTime() - startTimeOfDay.getTime()
 
             this.playTime = parseInt(timeNum/1000)
             this.sliderMIn = parseInt(timeNum/1000 - timeNum/1000%(60*60))
@@ -328,7 +329,8 @@
         this.$router.back()
       },
       getFileShowName(item) {
-          return  moment.unix(item.startTime).format('HH:mm:ss') + "-" + moment.unix(item.endTime).format('HH:mm:ss')
+          var stm=moment(item.startTime);
+          return  stm.format('HH:mm:ss') + "-" + moment(item.endTime).format('HH:mm:ss')
       },
       chooseMediaChange() {
 
@@ -375,8 +377,8 @@
       },
       getTimeForFile(file){
         console.log(file)
-        let starTime = new Date(file.startTime * 1000);
-        let endTime = new Date(file.endTime * 1000);
+        let starTime = new Date(file.startTime);
+        let endTime = new Date(file.endTime);
         if(this.checkIsOver24h(starTime,endTime)){
            endTime = new Date(this.chooseDate + " " + "23:59:59");
         }
