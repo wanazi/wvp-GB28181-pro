@@ -58,7 +58,7 @@
       </el-aside>
       <el-main style="padding: 22px">
         <div class="playBox" :style="playerStyle">
-          <player ref="recordVideoPlayer" :videoUrl="videoUrl" :height="true" style="width: 100%" ></player>
+          <player ref="recordVideoPlayer" :videoUrl="videoUrl" :offset="offset" :height="true" style="width: 100%" ></player>
         </div>
         <div class="player-option-box" >
           <el-slider
@@ -155,6 +155,7 @@
         loading: false,
         chooseDate: null,
         videoUrl: null,
+        offset: 0,
         choosedFile: null,
         queryDate: new Date(),
         currentPage: 1,
@@ -314,11 +315,13 @@
           this.loading = false;
         });
       },
-      chooseFile(file){
+      chooseFile(file,offset=0){
 			  if (file == null) {
           this.videoUrl = "";
           this.choosedFile = "";
+          this.offset=offset;
         }else {
+          this.offset=offset;
           this.choosedFile = file.fileName;
           this.videoUrl = `${this.getFileBasePath(file)}/download/${this.app}/${this.stream}/${this.chooseDate}/${file.fileName}`
           console.log(this.videoUrl)
@@ -369,7 +372,8 @@
             let timeForFile = this.getTimeForFile(this.detailFiles[i]);
             if (timeMilli >= timeForFile[0].getTime() && timeMilli <= timeForFile[1].getTime()){
               // TODO 当前未按照实际时间偏移，仅仅是找到对应的文静播放
-              this.chooseFile(this.detailFiles[i])
+              let offset=(timeMilli-timeForFile[0].getTime())/1000;
+              this.chooseFile(this.detailFiles[i],offset)
               return;
             }
           }

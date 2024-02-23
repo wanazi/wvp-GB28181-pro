@@ -10,7 +10,7 @@ export default {
             easyPlayer: null
         };
     },
-    props: ['videoUrl', 'error', 'hasaudio', 'height'],
+    props: ['videoUrl', 'error', 'hasaudio', 'height',"offset"],
     mounted () {
       let paramUrl = decodeURIComponent(this.$route.params.url)
        this.$nextTick(() =>{
@@ -37,16 +37,16 @@ export default {
               this.height = false
             }
             this.easyPlayer = new WasmPlayer(null, 'easyplayer', this.eventcallbacK, {Height: this.height})
-            this.easyPlayer.play(url, 1)
+            this.easyPlayer.play(url, 1,this.offset)
         },
         pause: function () {
           this.easyPlayer.destroy();
           this.easyPlayer = null
         },
         eventcallbacK: function(type, message) {
-            // console.log("player 事件回调")
-            // console.log(type)
-            // console.log(message)
+            console.log("player 事件回调")
+            console.log(type)
+            console.log(message)
         }
     },
     destroyed() {
