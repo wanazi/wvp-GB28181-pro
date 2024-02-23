@@ -32,7 +32,7 @@
           <div style="margin-top: 20px">
             <el-date-picker size="mini" v-model="chooseDate" :picker-options="pickerOptions" type="date"
                             value-format="yyyy-MM-dd" placeholder="日期" @change="dateChange()"></el-date-picker>
-            <!--            <el-button :disabled="!mediaServerId" size="mini" type="primary" icon="fa fa-cloud-download" style="margin: auto; margin-left: 12px " title="裁剪合并" @click="drawerOpen"></el-button>-->
+            <el-button :disabled="!mediaServerId" size="mini" type="primary" icon="fa fa-cloud-download" style="margin: auto; margin-left: 12px " title="裁剪合并" @click="drawerOpen"></el-button>
           </div>
           <div class="record-list-box" :style="recordListStyle">
             <ul v-if="detailFiles.length >0" class="infinite-list record-list" v-infinite-scroll="infiniteScroll" >
@@ -104,8 +104,8 @@
             <ul class="task-list">
               <li class="task-list-item" v-for="(item, index) in taskListEnded" :key="index">
                 <div class="task-list-item-box" style="height: 2rem;line-height: 2rem;">
-                  <span>{{ item.startTime.substr(10) }}-{{item.endTime.substr(10)}}</span>
-                  <a class="el-icon-download download-btn" :href="getFileBasePath()  + '/download.html?url=download/' "
+                  <span>{{ item.startTime }}-{{item.endTime}}</span>
+                  <a class="el-icon-download download-btn" :href="`${getFileBasePath(item)}`  + `/download.html?url=${item.playFile}` "
                      target="_blank">
                   </a>
                 </div>
@@ -520,7 +520,12 @@
         }).then(function (res) {
           if (res.data.code === 0) {
             if (isEnd){
-              that.taskListEnded = res.data.data;
+              that.taskListEnded = res.data.data.map(element => {
+                element.mediaServerId=that.mediaServerId;
+                return element;
+              });;
+              console.log(that.taskListEnded)
+              
             }else {
               that.taskListForRuning = res.data.data;
             }
