@@ -30,7 +30,7 @@ spring:
         master:
           type: com.zaxxer.hikari.HikariDataSource
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://${DB_HOST:172.16.51.151}:${DB_PORT:3306}/${DB_NAME:wvp2}?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&serverTimezone=PRC&useSSL=false&allowMultiQueries=true
+          url: jdbc:mysql://${DB_HOST:172.16.51.151}:${DB_PORT:3306}/${DB_NAME:wvp2}?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&serverTimezone=PRC&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true
           username: ${DB_USER:root}
           password: ${DB_PASSWORD:root}
           hikari:
