@@ -122,10 +122,10 @@ public class CloudRecordServiceImpl implements ICloudRecordService {
         Long startTimeStamp = null;
         Long endTimeStamp = null;
         if (startTime != null) {
-            startTimeStamp = DateUtil.yyyy_MM_dd_HH_mm_ssToTimestamp(startTime);
+            startTimeStamp = DateUtil.yyyy_MM_dd_HH_mm_ssToTimestampInMs(startTime);
         }
         if (endTime != null) {
-            endTimeStamp = DateUtil.yyyy_MM_dd_HH_mm_ssToTimestamp(endTime);
+            endTimeStamp = DateUtil.yyyy_MM_dd_HH_mm_ssToTimestampInMs(endTime);
         }
 
         List<MediaServerItem> mediaServers = new ArrayList<>();

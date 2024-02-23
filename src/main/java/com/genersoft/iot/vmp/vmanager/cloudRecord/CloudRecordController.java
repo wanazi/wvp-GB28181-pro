@@ -1,12 +1,9 @@
 package com.genersoft.iot.vmp.vmanager.cloudRecord;
 
 import com.alibaba.fastjson2.JSONArray;
-import com.genersoft.iot.vmp.conf.DynamicTask;
-import com.genersoft.iot.vmp.conf.UserSetting;
+
 import com.genersoft.iot.vmp.conf.exception.ControllerException;
 import com.genersoft.iot.vmp.conf.security.JwtUtils;
-import com.genersoft.iot.vmp.media.zlm.SendRtpPortManager;
-import com.genersoft.iot.vmp.media.zlm.ZLMServerFactory;
 import com.genersoft.iot.vmp.media.zlm.dto.MediaServerItem;
 import com.genersoft.iot.vmp.service.ICloudRecordService;
 import com.genersoft.iot.vmp.service.IMediaServerService;
@@ -22,13 +19,13 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 
 @SuppressWarnings("rawtypes")
 @Tag(name = "云端录像接口")
@@ -167,6 +164,7 @@ public class CloudRecordController {
             @RequestParam(required = false) String callId,
             @RequestParam(required = false) String remoteHost
     ){
+
         MediaServerItem mediaServerItem;
         if (mediaServerId == null) {
             mediaServerItem = mediaServerService.getDefaultMediaServer();
