@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
@@ -77,6 +78,9 @@ public class SipLayer implements CommandLineRunner {
 			tcpSipProvider.setDialogErrorsAutomaticallyHandled();
 			tcpSipProvider.addSipListener(sipProcessorObserver);
 			tcpSipProviderMap.put(monitorIp, tcpSipProvider);
+			if(sipConfig.getShowIp()!=null){
+				tcpSipProviderMap.put(sipConfig.getShowIp(), tcpSipProvider);
+			}
 			logger.info("[SIP SERVER] tcp://{}:{} 启动成功", monitorIp, port);
 		} catch (TransportNotSupportedException
 				 | TooManyListenersException
@@ -93,7 +97,9 @@ public class SipLayer implements CommandLineRunner {
 			udpSipProvider.addSipListener(sipProcessorObserver);
 
 			udpSipProviderMap.put(monitorIp, udpSipProvider);
-
+			if(sipConfig.getShowIp()!=null){
+				udpSipProviderMap.put(sipConfig.getShowIp(), udpSipProvider);
+			}
 			logger.info("[SIP SERVER] udp://{}:{} 启动成功", monitorIp, port);
 		} catch (TransportNotSupportedException
 				 | TooManyListenersException
@@ -135,6 +141,9 @@ public class SipLayer implements CommandLineRunner {
 	public String getLocalIp(String deviceLocalIp) {
 		if (!ObjectUtils.isEmpty(deviceLocalIp)) {
 			return deviceLocalIp;
+		}
+		if(sipConfig.getShowIp()!=null){
+			return sipConfig.getShowIp();
 		}
 		return getUdpSipProvider().getListeningPoint().getIPAddress();
 	}

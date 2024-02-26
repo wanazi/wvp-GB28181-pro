@@ -15,7 +15,7 @@ spring:
     # [必须修改] Redis服务器IP, REDIS安装在本机的,使用172.16.51.151
     host: ${REDIS_HOST:172.16.51.151}
     # [必须修改] 端口号
-    port: ${REDIS_PORT:6379}
+    port: ${REDIS_PORT:16379}
     # [可选] 数据库 DB
     database: ${REDIS_DB:6}
     # [可选] 访问密码,若你的redis服务器没有设置密码，就不需要用密码去连接
@@ -30,7 +30,7 @@ spring:
         master:
           type: com.zaxxer.hikari.HikariDataSource
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://${DB_HOST:172.16.51.151}:${DB_PORT:3306}/${DB_NAME:wvp2}?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&serverTimezone=PRC&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true
+          url: jdbc:mysql://${DB_HOST:172.16.51.151}:${DB_PORT:13306}/${DB_NAME:wvp2}?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&serverTimezone=PRC&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true
           username: ${DB_USER:root}
           password: ${DB_PASSWORD:root}
           hikari:
@@ -71,6 +71,7 @@ sip:
   id: ${WVP_SIP_ID:44010200492000000001}
   # [可选] 默认设备认证密码，后续扩展使用设备单独密码, 移除密码将不进行校验
   password: ${WVP_SIP_PWD:admin123}
+  show-ip: ${WVP_SIP_EXTERN_HOST:172.16.51.151}
 
 #zlm 默认服务器配置
 media:
@@ -94,8 +95,8 @@ media:
     send-port-range: 30000,30500 # 端口范围
   # 录像辅助服务， 部署此服务可以实现zlm录像的管理与下载， 0 表示不使用
   record-assist-port: ${RECORD_ASSIST_PORT:18081}
-  sdp-ip: ${sip.ip}
-  stream-ip: ${sip.ip}
+  sdp-ip: ${DEFAULT_ZLM_SDP_IP:172.16.51.151}
+  stream-ip: ${DEFAULT_ZLM_STREAM_IP:172.16.51.151}
 # [根据业务需求配置]
 user-settings:
   # 点播/录像回放 等待超时时间,单位：毫秒
