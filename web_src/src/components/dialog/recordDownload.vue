@@ -59,10 +59,6 @@ export default {
           if (!this.getProgressRun) {
             return;
           }
-          if (this.percentage == 100 ) {
-
-            return;
-          }
           setTimeout( ()=>{
             if (!this.showDialog) return;
             this.getProgress(this.getProgressTimer())
