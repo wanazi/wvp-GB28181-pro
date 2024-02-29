@@ -12,6 +12,11 @@ import Fingerprint2 from 'fingerprintjs2';
 import VueClipboards from 'vue-clipboards';
 import Contextmenu from "vue-contextmenujs"
 import userService from "./components/service/UserService"
+import moment from 'moment-timezone';
+if(Intl.DateTimeFormat().resolvedOptions().timeZone === "Etc/Unknown"){
+  moment.tz.setDefault("Asia/Shanghai");
+}
+
 
 Vue.config.productionTip = false;
 

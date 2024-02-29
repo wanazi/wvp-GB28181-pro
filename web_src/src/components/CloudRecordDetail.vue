@@ -332,8 +332,9 @@
         this.$router.back()
       },
       getFileShowName(item) {
-          var stm=moment(item.startTime);
-          return  stm.format('HH:mm:ss') + "-" + moment(item.endTime).format('HH:mm:ss')
+        console.log(moment.locale())
+          var stm=moment(new Date(item.startTime));
+          return  stm.format('HH:mm:ss') + "-" + moment(new Date(item.endTime)).format('HH:mm:ss')
       },
       chooseMediaChange() {
 

@@ -7,7 +7,7 @@
 <script>
 
 
-import moment from "moment/moment";
+import moment from 'moment-timezone';
 
 export default {
   name: 'ConsoleNet',
